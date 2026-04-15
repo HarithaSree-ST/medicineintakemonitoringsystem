@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .login-container {
+        width: 90%;
+        max-width: 450px;
+        margin: 80px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .login-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #1f2d3d;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #4fc3f7;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #4fc3f7;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #039be5;
+    }
+
+    .error {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .login-info {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .login-info p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+</style>
+
+<div class="login-container">
+    <h1>🔐 User Login</h1>
+
+    <div class="login-info">
+        <p><strong>Demo Credentials:</strong></p>
+        <p>👤 Username/Email: <code>Dhanashree</code></p>
+        <p>🔑 Password: <code>1234</code></p>
+    </div>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <div class="form-group">
+            <label>Username or Email</label>
+            <input type="text" name="email" required placeholder="Enter your username">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter your password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Login
+        </button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .schedule-container {
+        width: 90%;
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .schedule-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #1f2d3d;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    select, input[type="time"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    select:focus, input:focus {
+        outline: none;
+        border-color: #4fc3f7;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-primary {
+        background: #4fc3f7;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+        background: #039be5;
+    }
+
+    .success {
+        background: #d4edda;
+        color: #155724;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+</style>
+
+<div class="schedule-container">
+    <h1>⏰ Schedule Medicine</h1>
+
+    {% if success %}
+        <div class="success">
+            ✅ Schedule created successfully!
+        </div>
+    {% endif %}
+
+   <form method="POST">
+
+    <label>Select Patient:</label>
+    <select name="patient">
+        {% for p in patients %}
+        <option value="{{ p.id }}">{{ p.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Select Medicine:</label>
+    <select name="medicine">
+        {% for med in medicines %}
+        <option value="{{ med.id }}">{{ med.pill_name }}</option>
+        {% endfor %}
+    </select>
+    
+
+    <label>Exact Time:</label>
+    <input type="time" name="time" required>
+
+    <label>Frequency:</label>
+    <select name="frequency">
+        <option value="Daily">Daily</option>
+        <option value="Alternate Days">Alternate Days</option>
+        <option value="Weekly">Weekly</option>
+    </select>
+
+    <label>Timing:</label>
+    <select name="timing">
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Night">Night</option>
+    </select>
+
+    <label>Food:</label>
+    <select name="food">
+        <option value="Before Food">Before Food</option>
+        <option value="After Food">After Food</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Schedule</button>
+
+</form>
+</div>
+
+{% endblock %}

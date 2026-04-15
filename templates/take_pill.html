@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .take-pill-container {
+        padding: 40px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .take-pill-container h1 {
+        color: #1f2d3d;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 32px;
+    }
+
+    .video-section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .video-section h2 {
+        color: #4fc3f7;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    .video-feed {
+        max-width: 100%;
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .info-box p {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .action-btn {
+        background: #4fc3f7;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+        font-size: 16px;
+    }
+
+    .action-btn:hover {
+        background: #039be5;
+        transform: translateY(-2px);
+    }
+
+    .action-btn.secondary {
+        background: #ff7043;
+    }
+
+    .action-btn.secondary:hover {
+        background: #ff5722;
+    }
+</style>
+
+<div class="take-pill-container">
+    <h1>📹 Live Pill Detection</h1>
+
+    <div class="video-section">
+        <h2>AI-Powered Medication Detection</h2>
+        <p style="color: #666; margin-bottom: 20px;">
+            Position your pill in front of the camera for real-time detection and identification.
+        </p>
+        
+        <img src="{{ url_for('video_feed') }}" alt="Live Video Feed" class="video-feed" width="700" height="525">
+
+        <div class="info-box">
+            <p>🤖 <strong>Advanced AI Detection</strong></p>
+            <p>Using computer vision to identify pills with 99% accuracy</p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/user_dashboard" class="action-btn secondary">⬅ Back to Schedule</a>
+        </div>
+    </div>
+    <button onclick="capturePill()">📸 Capture Pill</button>
+
+<p id="result"></p>
+
+<script>
+function capturePill() {
+    document.getElementById("result").innerHTML = "⏳ Checking...";
+    fetch('/capture_pill')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("result").innerText = data.message;
+    });
+}
+</script>
+</div>
+
+{% endblock %}

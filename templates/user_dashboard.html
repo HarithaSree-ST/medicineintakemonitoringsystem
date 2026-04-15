@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .user-dashboard {
+        padding: 40px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .user-dashboard h1 {
+        color: #1f2d3d;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 32px;
+    }
+
+    .greeting {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .schedule-section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .medicine-card {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .badge {
+        background: rgba(255,255,255,0.2);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .action-buttons {
+        margin-top: 20px;
+    }
+
+    .action-btn {
+        background: #4fc3f7;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .secondary {
+        background: #ff7043;
+    }
+</style>
+
+<div class="user-dashboard">
+    <h1>💊 Your Medication Schedule</h1>
+
+    <div class="greeting">
+        <h2>Welcome, {{ session.get('user') }} 👋</h2>
+        <p>Please take your medicines on time for better health.</p>
+    </div>
+
+    <div class="schedule-section">
+        <h2>📋 Medicines to Take</h2>
+
+        {% if data %}
+            {% for item in data %}
+                <div class="medicine-card">
+
+                    <h3>💊 {{ item.medicine }}</h3>
+
+                    <p>💉 Dosage: {{ item.dosage }}</p>
+
+                    <div class="details">
+                        <span class="badge">⏰ {{ item.time }}</span>
+                        <span class="badge">🔄 {{ item.frequency }}</span>
+                        <span class="badge">🌅 {{ item.timing }}</span>
+                        <span class="badge">🍽 {{ item.food }}</span>
+                    </div>
+
+                    <!-- ✅ FULL STATUS HANDLING -->
+                    <p style="margin-top:10px; font-weight:bold;">
+                        Status:
+
+                        {% if item.status == "Taken" %}
+                            <span style="color: lightgreen;">✅ Taken Successfully</span>
+
+                        {% elif item.status == "Not Swallowed" %}
+                            <span style="color: orange;">⚠ Correct pill, not swallowed</span>
+
+                        {% elif item.status == "Wrong Pill (Swallowed)" %}
+                            <span style="color: red;">❌ Wrong pill swallowed</span>
+
+                        {% elif item.status == "Wrong Pill (Not Swallowed)" %}
+                            <span style="color: red;">❌ Wrong pill not swallowed</span>
+
+                        {% elif item.status == "Take Now" %}
+                            <span style="color: yellow;">🟢 Time to take now</span>
+
+                        {% elif item.status == "Missed" %}
+                            <span style="color: red;">❌ Missed</span>
+
+                        {% elif item.status == "Upcoming" %}
+                            <span style="color: lightblue;">🕒 Upcoming</span>
+
+                        {% else %}
+                            <span style="color: lightgray;">Unknown</span>
+
+                        {% endif %}
+                    </p>
+
+                </div>
+            {% endfor %}
+
+            <div class="action-buttons">
+                <a href="/take_pill" class="action-btn secondary">
+                    📹 Record Pill Intake
+                </a>
+
+                <br><br>
+
+                <a href="/intake_history" class="action-btn">
+                    📊 View Intake History
+                </a>
+            </div>
+
+        {% else %}
+            <p>📭 No medicines scheduled yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

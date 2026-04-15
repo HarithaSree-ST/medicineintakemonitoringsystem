@@ -1,0 +1,19 @@
+<h2>Medicine Intake History</h2>
+
+<table border="1">
+    <tr>
+        <th>Medicine</th>
+        <th>Detected</th>
+        <th>Status</th>
+        <th>Time</th>
+    </tr>
+
+    {% for log in logs %}
+    <tr>
+        <td>{{ log.medicine_name }}</td>
+        <td>{{ log.detected_name }}</td>
+        <td>{{ log.status }}</td>
+        <td>{{ log.timestamp }}</td>
+    </tr>
+    {% endfor %}
+</table>

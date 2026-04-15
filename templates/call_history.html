@@ -1,0 +1,21 @@
+<table border="1">
+<tr>
+<th>PatientName</th>
+<th>Phone</th>
+<th>Attempt</th>
+<th>Called To</th>
+<th>Status</th>
+<th>Time</th>
+</tr>
+
+{% for log in logs %}
+<tr>
+<td>{{ log.patient_name }}</td>
+<td>{{ log.phone }}</td>
+<td>{{ log.attempt }}</td>
+<td>{{ log.called_to }}</td>
+<td>{{ log.status }}</td>
+<td>{{ log.time }}</td>
+</tr>
+{% endfor %}
+</table>

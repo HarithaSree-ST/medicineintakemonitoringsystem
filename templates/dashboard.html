@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .dashboard-container {
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .dashboard-container h1 {
+        color: #1f2d3d;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .admin-section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .admin-section h2 {
+        color: #4fc3f7;
+        margin-bottom: 20px;
+        font-size: 22px;
+        border-bottom: 2px solid #4fc3f7;
+        padding-bottom: 10px;
+    }
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #4fc3f7, #2196F3);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 600;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(79, 195, 247, 0.3);
+    }
+
+    .action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(79, 195, 247, 0.5);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .stat-card h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .stat-card p {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #1f2d3d;
+    }
+
+    table tr:hover {
+        background: #f5f5f5;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1>📊 Admin Dashboard</h1>
+
+    <!-- Quick Actions -->
+    <div class="admin-section">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions">
+            <a href="/register" class="action-btn">
+                ➕ Register Patient
+            </a>
+            <a href="/add_medicine" class="action-btn">
+                💊 Add Medicine
+            </a>
+            <a href="/schedule" class="action-btn">
+                ⏰ Create Schedule
+            </a>
+            <a href="/take_pill" class="action-btn">
+                📹 Pill Detection
+            </a>
+            <a href="/call_history">📞 View Call History</a>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="admin-section">
+        <h2>System Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>{{ patients|length if patients else 0 }}</h3>
+                <p>Total Patients</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ medicines|length if medicines else 0 }}</h3>
+                <p>Medicines</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ schedules|length if schedules else 0 }}</h3>
+                <p>Active Schedules</p>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+{% endblock %}

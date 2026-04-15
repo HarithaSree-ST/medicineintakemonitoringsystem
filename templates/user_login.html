@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Login{% endblock %}
+
+{% block content %}
+<div class="container login-container">
+    <div class="login-box">
+        <h1 class="login-title">👤 Patient Login</h1>
+        <p class="login-subtitle">View your medicine schedule & track pills</p>
+
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Patient Name:</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">Login as Patient</button>
+        </form>
+
+        <div class="login-demo-info">
+            <h5>📝 Demo Credentials:</h5>
+            <p><strong>Username:</strong> Dhanashree</p>
+            <p><strong>Password:</strong> 1234</p>
+        </div>
+
+        <div class="login-footer">
+            <p>Are you an admin? <a href="{{ url_for('index') }}">← Back to Home</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #f5576c;
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.alert {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.login-demo-info {
+    background-color: #ffe8f0;
+    border-left: 4px solid #f5576c;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.login-demo-info h5 {
+    margin: 0 0 10px 0;
+    color: #f5576c;
+}
+
+.login-demo-info p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.login-footer p {
+    color: #666;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #f5576c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %}

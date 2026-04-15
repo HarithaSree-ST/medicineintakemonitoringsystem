@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ElderCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #1f2d3d;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo {
+            color: #4fc3f7;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #4fc3f7;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar-right a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .navbar-right .logout-btn {
+            background: #e74c3c;
+        }
+
+        .navbar-right .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .user-info {
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">🤖 ElderCare AI</div>
+    
+    {% if session.get('role') == 'admin' %}
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/register">Register Patient</a></li>
+            <li><a href="/add_medicine">Add Medicine</a></li>
+            <li><a href="/schedule">Schedule Medicine</a></li>
+        </ul>
+    {% elif session.get('role') == 'user' %}
+        <ul>
+            <li><a href="/user_dashboard">My Schedule</a></li>
+            <li><a href="/take_pill">Take Pill</a></li>
+        </ul>
+    {% else %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    {% endif %}
+
+    <div class="navbar-right">
+        {% if session.get('user') %}
+            <span class="user-info">👤 {{ session.get('user') }}</span>
+            <a href="/logout" class="logout-btn">Logout</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer style="text-align: center; padding: 30px; background: #1f2d3d; color: white; margin-top: 50px;">
+    <h3>ElderCare AI</h3>
+    <p>Smart Medication Monitoring for Elderly Patients using AI Technology</p>
+</footer>
+
+</body>
+</html>

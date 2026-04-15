@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .add-medicine-container {
+        width: 90%;
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .add-medicine-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #1f2d3d;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #4fc3f7;
+    }
+
+    textarea {
+        resize: none;
+        height: 80px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-primary {
+        background: #4fc3f7;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+        background: #039be5;
+    }
+
+    .success {
+        background: #d4edda;
+        color: #155724;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+</style>
+
+<div class="add-medicine-container">
+    <h1>💊 Add Medicine</h1>
+
+    {% if success %}
+        <div class="success">
+            ✅ Medicine added successfully!
+        </div>
+    {% endif %}
+
+    <form method="POST" action="/add_medicine">
+
+        <div class="form-group">
+            <label>Pill Name</label>
+            <input type="text" name="pill_name" required placeholder="e.g., Aspirin">
+        </div>
+
+        <div class="form-group">
+            <label>Dosage</label>
+            <input type="text" name="dosage" required placeholder="e.g., 500mg">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" required placeholder="Medicine details and instructions..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            ➕ Add Medicine
+        </button>
+
+    </form>
+</div>
+
+{% endblock %}
